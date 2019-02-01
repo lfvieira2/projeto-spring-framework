@@ -12,7 +12,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
-import com.cursomc.domain.Categoria;
 import com.cursomc.domain.Cidade;
 import com.cursomc.domain.Cliente;
 import com.cursomc.domain.Endereco;
