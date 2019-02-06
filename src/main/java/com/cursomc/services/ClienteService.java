@@ -18,7 +18,6 @@ import com.cursomc.domain.Endereco;
 import com.cursomc.domain.enums.TipoCliente;
 import com.cursomc.dto.ClienteDTO;
 import com.cursomc.dto.ClienteNewDTO;
-import com.cursomc.repositories.CidadeRepository;
 import com.cursomc.repositories.ClienteRepository;
 import com.cursomc.repositories.EnderecoRepository;
 import com.cursomc.services.exceptions.DataIntegrityException;
@@ -29,9 +28,6 @@ public class ClienteService {
 	
 	@Autowired
 	private ClienteRepository repo;
-	
-	@Autowired
-	private CidadeRepository cidadeRepository;
 	
 	@Autowired
 	private EnderecoRepository enderecoRepository;
