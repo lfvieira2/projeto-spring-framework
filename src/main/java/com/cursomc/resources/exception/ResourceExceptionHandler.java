@@ -19,7 +19,7 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(ObjectNotFoundException.class)
 	public ResponseEntity<StandardErro> objectNotFound(ObjectNotFoundException e, HttpServletRequest request){
 		
-		StandardErro err = new StandardErro(HttpStatus.NOT_FOUND.value(), e.getMessage(), System.currentTimeMillis());
+		StandardErro err = new StandardErro(System.currentTimeMillis(), HttpStatus.NOT_FOUND.value(), "Not found", e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(err);
 		
 	}
@@ -27,15 +27,14 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(DataIntegrityException.class)
 	public ResponseEntity<StandardErro> dataIntegrity(DataIntegrityException e, HttpServletRequest request){
 		
-		StandardErro err = new StandardErro(HttpStatus.BAD_REQUEST.value(), e.getMessage(), System.currentTimeMillis());
+		StandardErro err = new StandardErro(System.currentTimeMillis(), HttpStatus.BAD_REQUEST.value(), "Data Integrety", e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
 		
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<StandardErro> validation(MethodArgumentNotValidException e, HttpServletRequest request){
-		
-		ValidationError err = new ValidationError(HttpStatus.BAD_REQUEST.value(), "Erro de validação", System.currentTimeMillis());
+		ValidationError err = new ValidationError(System.currentTimeMillis(), HttpStatus.UNPROCESSABLE_ENTITY.value(), "Validation error", e.getMessage(), request.getRequestURI());
 		for(FieldError x : e.getBindingResult().getFieldErrors()) {
 			err.addError(x.getField(), x.getDefaultMessage());
 		}
@@ -46,7 +45,7 @@ public class ResourceExceptionHandler {
 	@ExceptionHandler(AuthorizationException.class)
 	public ResponseEntity<StandardErro> authorization(AuthorizationException e, HttpServletRequest request){
 		
-		StandardErro err = new StandardErro(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+		StandardErro err = new StandardErro(System.currentTimeMillis(), HttpStatus.FORBIDDEN.value(), "Access denied", e.getMessage(), request.getRequestURI());
 		return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
 		
 	}
